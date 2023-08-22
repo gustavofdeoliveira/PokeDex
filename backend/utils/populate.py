@@ -20,11 +20,14 @@ results = data['results']
 for result in results:
     name = result['name']
     url = result['url']
+    requests.get(url).json()['sprites']["front_default"]
     
     # Cria um documento para inserir no MongoDB
     pokemon_data = {
         'name': name,
-        'url': url
+        'image': requests.get(url).json()['sprites']["front_default"],
+        'weight': requests.get(url).json()['weight'],
+        'height': requests.get(url).json()['height'],
     }
     
     # Insere o documento na coleção
